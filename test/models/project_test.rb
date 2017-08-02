@@ -32,15 +32,30 @@ class ProjectTest < ActiveSupport::TestCase
 
   end
 
-test  'Project end date must be after start date' do
-  owner = new_user
-  owner.save
-  project = new_project
-  project.owner = owner
-  project.end_date = project.start_date + 1.day
-  assert project.valid?, 'Project end date must be after start date.'
+  test  'Project end date must be after start date' do
+    owner = new_user
+    owner.save
+    project = new_project
+    project.owner = owner
+    project.end_date = project.start_date + 1.day
+    assert project.valid?, 'Project end date must be after start date.'
 
-end
+    end
+
+    test 'goal_must_be_positive' do
+
+      owner = new_user
+      owner.save
+      project = new_project
+      project.owner = owner
+      project.goal = -1
+
+      assert project.invalid?, 'goal must be a positive number'
+
+    end
+
+
+
   def new_project
     Project.new(
       title:       'Cool new boardgame',

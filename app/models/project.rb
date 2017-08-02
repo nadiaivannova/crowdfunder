@@ -8,6 +8,7 @@ class Project < ActiveRecord::Base
   validates :owner_id, :title, :description, :goal, :start_date, :end_date, presence: true
   validate :start_date_in_future
   validate :end_date_after_start_date
+  validate :goal_is_positive
 
   def start_date_in_future
 
@@ -24,6 +25,13 @@ class Project < ActiveRecord::Base
 
       else
         self.errors[:project] << 'Project end date must be after start date.'
+      end
+    end
+
+    def goal_is_positive
+      if self.goal >= 1
+      else
+        self.errors[:project] << ' project goal must be a positive number'
       end
     end
 
