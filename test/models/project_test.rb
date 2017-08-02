@@ -22,21 +22,25 @@ class ProjectTest < ActiveSupport::TestCase
 
   test 'project invalid when start date in past' do
 
-  #Arrange
+  owner = new_user
+  owner.save
   project = new_project
+  project.owner = owner
   project.start_date = Date.yesterday
-  project.save
-
-  #Act
-
-  result = project.save
-
-  #Assert
 
   assert project.invalid?, 'Project start must be in future.'
 
   end
 
+test  'Project end date must be after start date' do
+  owner = new_user
+  owner.save
+  project = new_project
+  project.owner = owner
+  project.end_date = project.start_date + 1.day
+  assert project.valid?, 'Project end date must be after start date.'
+
+end
   def new_project
     Project.new(
       title:       'Cool new boardgame',
