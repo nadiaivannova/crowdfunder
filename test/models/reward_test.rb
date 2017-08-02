@@ -15,6 +15,7 @@ class RewardTest < ActiveSupport::TestCase
   end
 
   test 'A reward cannot be created without a dollar amount' do
+
     project = new_project
     project.save
     reward = Reward.create(
@@ -26,6 +27,7 @@ class RewardTest < ActiveSupport::TestCase
   end
 
   test 'A reward cannot be created without a description' do
+
     project = new_project
     project.save
     reward = Reward.create(
