@@ -54,6 +54,19 @@ class ProjectTest < ActiveSupport::TestCase
 
     end
 
+    test 'project_can_see_pledges'do
+    skip
+    owner = new_user
+    owner.save
+    project = new_project
+    project.save
+    pledge = Pledge.new(dollar_amount: 3.00, project: project)
+    pledge.user = owner
+    pledge.save
+
+
+
+    end
 
 
   def new_project
