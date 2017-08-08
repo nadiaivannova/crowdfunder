@@ -3,7 +3,6 @@ require_relative '../test_helper'
 class PledgeTest < ActiveSupport::TestCase
 
   test 'A pledge can be created' do
-    skip
     pledge = Pledge.create(
       dollar_amount: 99.00,
       project: new_project,
